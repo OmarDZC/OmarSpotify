@@ -19,7 +19,7 @@ final class PerfilController extends AbstractController
         ]);
     }
 
-    #[Route('/perfil/new', name: 'newEstilo')]
+    #[Route('/perfil/new', name: 'new_perfil_crear')]
     public function crearEstilo(EntityManagerInterface $entity){
         $estiloRepo = $entity->getRepository(Estilo::class);
         $estilo = $estiloRepo->findOneByNombre('HipHop');
@@ -28,7 +28,7 @@ final class PerfilController extends AbstractController
         $perfil->setFoto('Foto');
         $perfil->setDescripcion('Perfil 1');
         $perfil->addEstiloMusicalPreferido($estilo);
-        
+
         $entity->persist($perfil);
         $entity->flush();
 
