@@ -31,13 +31,13 @@ class EstiloRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?Estilo
-    //    {
-    //        return $this->createQueryBuilder('e')
-    //            ->andWhere('e.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    public function findOneByNombre($nombre): ?Estilo
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.nombre = :val')
+            ->setParameter('val', $nombre)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 }

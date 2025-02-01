@@ -1,10 +1,9 @@
 <?php
 
 namespace App\Controller;
-
-use App\Entity\Estilo;
-use App\Entity\Perfil;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\Perfil;
+use App\Entity\Estilo;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
@@ -20,26 +19,22 @@ final class PerfilController extends AbstractController
         ]);
     }
 
-    #[Route('/perfil/new', name: 'app_perfil_crear')]
-    public function newPerfil(EntityManagerInterface $entity): JsonResponse
-    {
-        $estilo = new Estilo();
-        $estilo->setNombre("HipHop");
-        $estilo->setDescripcion("Descripcion del HipHop");
-        
-        $perfil = new Perfil();
-        $perfil->setFoto("foto");
-        $perfil->addEstiloMusicalPreferido($estilo);
-        $perfil->setDescripcion("Descripcion del perfil");
+    #[Route('/perfil/new', name: 'newEstilo')]
+    public function crearEstilo(EntityManagerInterface $entity){
+        $estiloRepo = $entity->getRepository(Estilo::class);
+        $estilo = $estiloRepo->findOneByNombre('HipHop');
 
-        //hacer persistencia
+        $perfil=new Perfil();
+        $perfil->setFoto('Foto');
+        $perfil->setDescripcion('Perfil 1');
+        $perfil->addEstiloMusicalPreferido($estilo);
+        
         $entity->persist($perfil);
         $entity->flush();
-        
+
         return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/PerfilController.php',
+            'message' => 'Perfil creado!',
+            'path' => 'src/Controller/EstiloController.php',
         ]);
     }
-
 }

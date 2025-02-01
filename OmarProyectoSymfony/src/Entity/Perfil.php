@@ -24,12 +24,13 @@ class Perfil
     /**
      * @var Collection<int, Estilo>
      */
-    #[ORM\OneToMany(targetEntity: Estilo::class, mappedBy: 'estiloMusicalPreferido', cascade: ['persist'])]
-    private Collection $estiloMusicalPreferido;
+    #[ORM\ManyToMany(targetEntity: Estilo::class, inversedBy: 'perfiles')]
+    private Collection $estiloPreferido;
+
 
     public function __construct()
     {
-        $this->estiloMusicalPreferido = new ArrayCollection();
+        $this->estiloPreferido = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -64,29 +65,23 @@ class Perfil
     /**
      * @return Collection<int, Estilo>
      */
-    public function getEstiloMusicalPreferido(): Collection
+    public function getEstiloPreferido(): Collection
     {
-        return $this->estiloMusicalPreferido;
+        return $this->estiloPreferido;
     }
 
-    public function addEstiloMusicalPreferido(Estilo $estiloMusicalPreferido): static
+    public function addEstiloMusicalPreferido(Estilo $estilo): static
     {
-        if (!$this->estiloMusicalPreferido->contains($estiloMusicalPreferido)) {
-            $this->estiloMusicalPreferido->add($estiloMusicalPreferido);
-            $estiloMusicalPreferido->setEstiloMusicalPreferido($this);
+        if (!$this->estiloPreferido->contains($estilo)) {
+            $this->estiloPreferido->add($estilo);
         }
 
         return $this;
     }
 
-    public function removeEstiloMusicalPreferido(Estilo $estiloMusicalPreferido): static
+    public function removeEstiloMusicalPreferido(Estilo $estilo): static
     {
-        if ($this->estiloMusicalPreferido->removeElement($estiloMusicalPreferido)) {
-            // set the owning side to null (unless already changed)
-            if ($estiloMusicalPreferido->getEstiloMusicalPreferido() === $this) {
-                $estiloMusicalPreferido->setEstiloMusicalPreferido(null);
-            }
-        }
+        $this->estiloPreferido->removeElement($estilo);
 
         return $this;
     }

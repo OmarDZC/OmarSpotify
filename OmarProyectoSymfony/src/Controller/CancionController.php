@@ -29,7 +29,7 @@ final class CancionController extends AbstractController
         $cancion->setDuracion(144);  // 2:39min
         $cancion->setAlbum('The Party Never Ends');
         $cancion->setAutor('Juice WRLD');
-        $cancion->setReproducciones(500000);
+        /* $cancion->setReproducciones(500000); */
         $cancion->setLikes(250000);
 
         $estilo = new Estilo();

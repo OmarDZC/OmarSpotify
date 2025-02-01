@@ -41,7 +41,7 @@ final class PlaylistController extends AbstractController
         $playlist->setNombre("Mi Playlist HipHop");
         $playlist->setVisibilidad("true");
         //Para iniciar en 0
-        $playlist->setReproducciones(10000);  
+        /* $playlist->setReproducciones(10000);   */
         $playlist->setLikes(500);  
         $playlist->setPropietario($usuario);
         

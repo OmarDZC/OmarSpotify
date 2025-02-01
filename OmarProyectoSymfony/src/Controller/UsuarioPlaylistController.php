@@ -44,7 +44,7 @@ final class UsuarioPlaylistController extends AbstractController
         $playlist = new Playlist();
         $playlist->setNombre("playlist Rap");
         $playlist->setVisibilidad("true");
-        $playlist->setReproducciones(41234);
+        /* $playlist->setReproducciones(41234); */
         $playlist->setLikes(2342);
         $playlist->setPropietario($usuario);
 

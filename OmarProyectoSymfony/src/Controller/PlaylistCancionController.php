@@ -44,7 +44,7 @@ public function newPlaylistCancion(EntityManagerInterface $entity): JsonResponse
     $playlist = new Playlist();
     $playlist->setNombre("playlist de Trap");
     $playlist->setVisibilidad("false");
-    $playlist->setReproducciones(234);
+    /* $playlist->setReproducciones(234); */
     $playlist->setLikes(44);
     $playlist->setPropietario($propietario);
 
@@ -67,6 +67,7 @@ public function newPlaylistCancion(EntityManagerInterface $entity): JsonResponse
     $playlistCancion = new PlaylistCancion();
     $playlistCancion->setPlaylist($playlist);
     $playlistCancion->setCancion($cancion);
+    $playlistCancion->setReproducciones(234);
 
     //persistencia
     $entity->persist($propietario);
