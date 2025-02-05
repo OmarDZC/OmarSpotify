@@ -92,7 +92,6 @@ class Estilo
     public function removeCancione(Cancion $cancione)
     {
         if ($this->canciones->removeElement($cancione)) {
-            // set the owning side to null (unless already changed)
             if ($cancione->getGenero() === $this) {
                 $cancione->setGenero(null);
             }

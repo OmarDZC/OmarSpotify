@@ -28,7 +28,7 @@ class Cancion
     private ?string $autor = null;
     
     #[ORM\ManyToOne(targetEntity: Estilo::class, inversedBy: 'canciones', cascade:['persist'])]
-    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Estilo $genero = null;
 
     /* #[ORM\Column]
@@ -166,7 +166,6 @@ class Cancion
     public function removePlaylistCancion(PlaylistCancion $playlistCancion): static
     {
         if ($this->playlistCancions->removeElement($playlistCancion)) {
-            // set the owning side to null (unless already changed)
             if ($playlistCancion->getCancion() === $this) {
                 $playlistCancion->setCancion(null);
             }
