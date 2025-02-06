@@ -31,13 +31,13 @@ class UsuarioRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?Usuario
-    //    {
-    //        return $this->createQueryBuilder('u')
-    //            ->andWhere('u.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+       public function findByNombre($nombre): ?Usuario
+       {
+           return $this->createQueryBuilder('u')
+               ->andWhere('u.nombre = :val')
+               ->setParameter('val', $nombre)
+               ->getQuery()
+               ->getOneOrNullResult()
+           ;
+       }
 }

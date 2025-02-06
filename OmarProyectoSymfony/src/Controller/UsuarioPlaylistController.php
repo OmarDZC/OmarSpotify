@@ -25,40 +25,18 @@ final class UsuarioPlaylistController extends AbstractController
     #[Route('/usuarioPlaylist/new', name: 'app_usuarioPlaylist_new')]
     public function newUsuarioPlaylist(EntityManagerInterface $entity): JsonResponse
     {
-        //crear perfil
-        $usuario = new Usuario();
-        $usuario->setEmail("usuario1@gmail.com");
-        $usuario->setPassword("1234");
-        $usuario->setNombre("usuario3");
-        $fechaNacimiento = new \DateTime('1999-02-02');
-        $usuario->setFechaNacimiento($fechaNacimiento);
+        $usuarioRepo = $entity->getRepository(Usuario::class);
+        $usuario = $usuarioRepo->findByNombre('UsuarioElPrimero');
 
-        //crear perfil
-        $perfil = new Perfil();
-        $perfil->setFoto("foto 3 del perfil");
-        $perfil->setDescripcion("descripcion del usuario 3");
-
-        $usuario->setPerfil($perfil);
-
-        //Crear la playlist
-        $playlist = new Playlist();
-        $playlist->setNombre("playlist Rap");
-        $playlist->setVisibilidad("true");
-        /* $playlist->setReproducciones(41234); */
-        $playlist->setLikes(2342);
-        $playlist->setPropietario($usuario);
+        $playlistRepo = $entity->getRepository(Playlist::class);
+        $playlist = $playlistRepo->findByNombre('Playlist1');
 
         $usuarioPlaylist = new UsuarioPlaylist();
-        $usuarioPlaylist->setReproducida(3523523);
-
-        
-        $usuarioPlaylist->setUsuario($usuario);
         $usuarioPlaylist->setPlaylist($playlist);
+        $usuarioPlaylist->setUsuario($usuario);
+        $usuarioPlaylist->setReproducida(5732);
 
-
-        $entity->persist($perfil);
-        $entity->persist($usuario);
-        $entity->persist($playlist);
+        //persist
         $entity->persist($usuarioPlaylist);
         $entity->flush();
 

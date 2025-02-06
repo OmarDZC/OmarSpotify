@@ -31,11 +31,11 @@ class CancionRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-       public function findByNombre($nombre): ?Cancion
+       public function findByNombre($titulo): ?Cancion
        {
            return $this->createQueryBuilder('c')
-               ->andWhere('$nombre = :val')
-               ->setParameter('val', $nombre)
+               ->andWhere('c.titulo = :val')
+               ->setParameter('val', $titulo)
                ->getQuery()
                ->getOneOrNullResult()
            ;

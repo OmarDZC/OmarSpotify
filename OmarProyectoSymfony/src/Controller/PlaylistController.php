@@ -24,31 +24,17 @@ final class PlaylistController extends AbstractController
     #[Route('/playlist/new', name: 'app_playlist_new')]
     public function newPerfil(EntityManagerInterface $entity): JsonResponse
     {
-        $perfil = new Perfil();
-        $perfil->setFoto("foto usuario1");
-        $perfil->setDescripcion("Perfil de usuario1");
+        $usuarioRepo = $entity->getRepository(Usuario::class);
+        $usuario = $usuarioRepo->findByNombre('UsuarioElPrimero');
 
-        $usuario = new Usuario();
-        $usuario->setNombre("usuario1");
-        $usuario->setEmail("usuario2@gmail.com");
-        $usuario->setPassword("123");
-        $fechaNacimiento = new \DateTime('1999-02-02');
-        $usuario->setFechaNacimiento($fechaNacimiento);
-        $usuario->setPerfil($perfil);
-
-        
+        //playlist
         $playlist = new Playlist();
-        $playlist->setNombre("Mi Playlist HipHop");
-        $playlist->setVisibilidad("true");
-        //Para iniciar en 0
-        /* $playlist->setReproducciones(10000);   */
-        $playlist->setLikes(500);  
-        $playlist->setPropietario($usuario);
-        
-        
-        //hacer persistencia
-        $entity->persist($usuario);
-        $entity->persist($perfil);
+        $playlist->setNombre('Playlist1');
+        $playlist->setVisibilidad('public');
+        $playlist->setLikes(546);
+        $playlist->setPropietario($usuario); //asociarlo al usurio
+
+        //persist
         $entity->persist($playlist);
         $entity->flush();
         

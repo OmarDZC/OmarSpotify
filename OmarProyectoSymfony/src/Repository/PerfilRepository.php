@@ -31,7 +31,7 @@ class PerfilRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-       public function findOneByNombre($nombre): ?Perfil
+       public function findByNombre($nombre): ?Perfil
        {
            return $this->createQueryBuilder('p')
                ->andWhere('p.nombre = :val')

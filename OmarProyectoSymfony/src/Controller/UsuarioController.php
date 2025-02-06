@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Perfil;
 use App\Entity\Usuario;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -23,24 +24,22 @@ final class UsuarioController extends AbstractController
     #[Route('/usuario/new', name: 'app_playlist_crear')]
     public function newUsuario(EntityManagerInterface $entity): JsonResponse
     {
-        $perfil = new Perfil();
-        $perfil->setFoto("foto1");
-        $perfil->setDescripcion("perfil del usuario");
+        $perfilRepo = $entity->getRepository(Perfil::class);
+        $perfil = $perfilRepo->find('1');
 
         $usuario = new Usuario();
-        $usuario->setEmail("ejemplo@gmail.com");
-        $usuario->setPassword("1234");
-        $usuario->setNombre("usuario1");
+        $usuario->setEmail('usuario1@gmail.com');
+        $usuario->setPassword('1234');
+        $usuario->setNombre('UsuarioElPrimero');
+        $fecha = new DateTime('1994-03-12'); //para que sea valida
+        $usuario->setFechaNacimiento($fecha);
+        //asociar al perfil encontrado
         $usuario->setPerfil($perfil);
 
-        //crear el nuevo Date de fecha nacimeinto y añadirlo a usuario
-        $fechaNacimiento = new \DateTime('1994-01-01');
-        $usuario->setFechaNacimiento($fechaNacimiento);
-        
-
-        //hacer persistencia
+        //persistir
         $entity->persist($usuario);
         $entity->flush();
+
         
         return $this->json([
             'message' => 'Welcome to your new controller!',
