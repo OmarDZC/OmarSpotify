@@ -26,7 +26,7 @@ class CancionCrudController extends AbstractCrudController
             IntegerField::new('duracion'),
             TextField::new('album'),
             TextField::new('autor'),
-            AssociationField::new('genero', 'Estilo'), //cambiar esto sin ->set.. para que pueda editar
+            AssociationField::new('genero', 'Estilo')->setFormTypeOption('by_reference',true), //cambiar esto sin ->set.. para que pueda editar
             IntegerField::new('likes')
         ];
     }

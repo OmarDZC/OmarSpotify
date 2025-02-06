@@ -13,11 +13,16 @@ class PlaylistCancion
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'lista')]
+    #[ORM\ManyToOne(inversedBy: 'playlistCanciones')]
     private ?Playlist $playlist = null;
 
     #[ORM\ManyToOne(inversedBy: 'cancion')]
     private ?Cancion $cancion = null;
+
+    public function __toString()
+    {
+        return $this->getCancion()->getTitulo(); //obtener titulo de la cancion
+    }
 
     #[ORM\Column]
     private ?int $reproducciones = null;
