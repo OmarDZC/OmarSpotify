@@ -27,6 +27,12 @@ class PlaylistCancion
     #[ORM\Column]
     private ?int $reproducciones = null;
 
+    public function __construct()
+    {
+        $this->reproducciones = 0; //por defecto
+    }
+
+
     public function getId(): ?int
     {
         return $this->id;
