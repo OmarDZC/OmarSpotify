@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Cancion;
 use App\Entity\Estilo;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -41,7 +42,7 @@ final class CancionController extends AbstractController
         $entityManager->persist($cancion);
         $entityManager->flush();
 
-        
+
         return $this->json([
             'message' => 'Canción creada correctamente',
             'id' => $cancion->getId(),
@@ -51,5 +52,25 @@ final class CancionController extends AbstractController
             'autor' => $cancion->getAutor(),
             'estilo' => $estilo->getNombre(),
         ]);
+    }
+
+    #[Route('/canciones', name: 'listar_canciones', methods: ['GET'])]
+    public function listarCanciones(EntityManagerInterface $entityManager): JsonResponse
+    {
+        $cancionesRepo = $entityManager->getRepository(Cancion::class);
+        //obtener todas las canciones
+        $canciones = $cancionesRepo->findAll();
+
+        //envia como JSON
+        $data = [];
+        foreach ($canciones as $cancion) {
+            $data[] = [
+                'titulo' => $cancion->getTitulo(),
+                'autor' => $cancion->getAutor(),
+                'album' => $cancion->getAlbum(),
+            ];
+        }
+
+        return $this->json($data);
     }
 }
