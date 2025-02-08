@@ -172,6 +172,13 @@
     color: #ffffff;
 }
 
+#indexList {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 50px; /*espacio entre cada cancion*/
+    margin-right: 50px;
+}
+
 #cancionesList {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -203,6 +210,39 @@
     font-size: 14px;
     color: #777;
 }
+
+#playlistList {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 50px; /*espacio entre cada cancion*/
+    margin-right: 50px;
+}
+
+.playlistItem {
+    background-color: #e0e0e0;
+    padding: 120px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    &:hover{
+        transform: scale(1.1);
+    }
+}
+
+.playlistItem h3 {
+    font-size: 20px;
+    color: #333;
+}
+
+.playlistItem p {
+    font-size: 14px;
+    color: #777;
+}
+
 
 /*FOOTER REPRODUCTOR*/
 #footer {

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"> -->
+    <title>Document</title>
+</head>
+<body>
+    <header id="containerHeader">
+        <div id="titulo">
+            <img src="images/logo.png" alt="logoSpotify" id="logoSpotify">
+        </div>
+        <div id="busqueda">
+            <div class="inputContainer">
+                <input type="text" name="buscarCancion" id="buscarCancion" placeholder="¿Qué quieres reproducir?">
+                <img src="images/lupa.png" alt="lupa" class="iconoLupa">
+            </div>
+            <input type="submit" value="Buscar" id="btnBuscar">
+        </div>
+        <div id="registro">
+            <img src="images/acceso.png" alt="logoRegistro" id="logoRegistro">
+        </div>
+    </header>
+
+    <div id="mainContainer">
+        <nav id="containerNav">
+            <div id="tuBiblioteca">
+                <img src="images/biblioteca-de-musica.png" alt="biblioteca">
+                <span>Tu Biblioteca</span>
+            </div>
+            <div id="listaNav">
+                <ul>
+                    <li>
+                        <img src="images/iconoMusic.png" alt="iconomusic" id="iconoMusic">
+                        <a href="canciones.html">Canciones</a>
+                    </li>
+                    <li>
+                        <img src="images/iconoPlaylist.png" alt="iconoPlaylist" id="iconoPlaylist">
+                        <a href="playlist.html">Playlist</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    
+        <div id="containerBody">
+            <div id="tituloCanciones">
+                <h2>Tus canciones</h2>
+            </div>
+            
+            <div id="cancionesList">
+                <article class="cancionItem">
+                    <h3>Canción 1</h3>
+                    <p>Artista: Nombre</p>
+                </article>
+                <article class="cancionItem">
+                    <h3>Canción 2</h3>
+                    <p>Artista: Nombre</p>
+                </article>
+                <article class="cancionItem">
+                    <h3>Canción 3</h3>
+                    <p>Artista: Nombre</p>
+                </article>
+            </div>
+        </div>
+    </div>
+    
+    <footer id="footer">
+        <div id="reproductor">
+            <div id="info">
+                <div id="detallesCancion">
+                    <span id="nombreCancion">Canción 1</span>
+                    <span id="nombreArtista">Artista: Nombre</span>
+                </div>
+            </div>
+            <div id="audioContainer">
+                <audio id="audioCancion" src="#" preload="auto" controls></audio>
+            </div>
+        </div>
+    </footer>
+    
+
+    <script src="script/script.js"></script>
+</body>
+</html>

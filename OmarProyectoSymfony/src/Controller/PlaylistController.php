@@ -44,5 +44,24 @@ final class PlaylistController extends AbstractController
         ]);
     }
 
+    
+    #[Route('/mostrarPlaylist', name: 'listas_playlist', methods: ['GET'])]
+    public function listarCanciones(EntityManagerInterface $entityManager): JsonResponse
+    {
+        $playlistRepo = $entityManager->getRepository(Playlist::class);
+        $playlists = $playlistRepo->findAll();
+    
+        $data = [];
+        foreach ($playlists as $playlist) {
+            $data[] = [
+                'nombre' => $playlist->getNombre(),
+                'visibilidad' => $playlist->getVisibilidad(),
+                'propietario' => $playlist->getPropietario() ? $playlist->getPropietario()->getId() : null,
+                'likes' => $playlist->getLikes(),
+                'canciones' => $playlist->getPlaylistCanciones()->count()
+            ];
+        }
+        return $this->json($data);
+    }
 
 }
