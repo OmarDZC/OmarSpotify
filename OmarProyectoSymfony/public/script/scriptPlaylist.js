@@ -1,11 +1,11 @@
 //MOSTRAR TODAS LAS PLAYLIST
 fetch("/mostrarPlaylist") 
-.then(response => response.json()) // Procesa la respuesta como JSON
+.then(response => response.json()) //procesar como JSON
 .then(playlists => {
     console.log(playlists);
     console.log(playlists);
     const contenedor = document.getElementById("playlistList");
-    contenedor.innerHTML = ""; // Limpia contenido previo
+    contenedor.innerHTML = "";
 
     if (playlists.length === 0) {
         contenedor.innerHTML = "<p>No hay playlists disponibles.</p>";

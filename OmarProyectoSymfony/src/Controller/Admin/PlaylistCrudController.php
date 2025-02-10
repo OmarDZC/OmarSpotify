@@ -25,7 +25,7 @@ class PlaylistCrudController extends AbstractCrudController
             TextField::new('nombre'),
             TextField::new('visibilidad'),
             IntegerField::new('likes'),
-            AssociationField::new('propietario', 'Propietario')->setFormTypeOption('by_reference', true),
+            /* AssociationField::new('propietario', 'Propietario')->setFormTypeOption('by_reference', true), */
             CollectionField::new('playlistCanciones', 'Canciones')->useEntryCrudForm(PlaylistCancionCrudController::class),
         ];
     }
