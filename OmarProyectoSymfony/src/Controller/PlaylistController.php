@@ -37,20 +37,20 @@ final class PlaylistController extends AbstractController
         //persist
         $entity->persist($playlist);
         $entity->flush();
-        
+
         return $this->json([
             'message' => 'Welcome to your new controller!',
             'path' => 'src/Controller/PerfilController.php',
         ]);
     }
 
-    
+
     #[Route('/mostrarPlaylist', name: 'listas_playlist', methods: ['GET'])]
     public function listarCanciones(EntityManagerInterface $entityManager): JsonResponse
     {
         $playlistRepo = $entityManager->getRepository(Playlist::class);
         $playlists = $playlistRepo->findAll();
-    
+
         $data = [];
         foreach ($playlists as $playlist) {
             $data[] = [
@@ -64,4 +64,20 @@ final class PlaylistController extends AbstractController
         return $this->json($data);
     }
 
+    #[Route('/mostrarCancionesPlaylist/{nombre}', name: 'mostrar_playlists', methods: ['GET'])]
+    public function mostrarCancionesPorNombre($nombre, EntityManagerInterface $entityManager): JsonResponse
+    {
+        $playlistRepo = $entityManager->getRepository(Playlist::class);
+        $playlist = $playlistRepo->findOneBy(['nombre' => $nombre]); // Buscar por nombre
+
+        $canciones = [];
+        foreach ($playlist->getPlaylistCanciones() as $playlistCancion) {
+            $canciones[] = $playlistCancion->getCancion()->getTitulo(); // Obtener solo el título de la canción
+        }
+
+        return $this->json([
+            'nombre' => $playlist->getNombre(),
+            'canciones' => $canciones, // Listado de canciones
+        ]);
+    }
 }

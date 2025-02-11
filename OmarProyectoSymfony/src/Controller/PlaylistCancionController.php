@@ -49,24 +49,24 @@ final class PlaylistCancionController extends AbstractController
         ]);
     }
 
-    #[Route('/playlistCancion/buscar', name: 'app_playlist_cancion_new', methods: ['GET'])]
-    public function cancionesDePlaylist(EntityManagerInterface $entity): JsonResponse
+    //se buscaria como playlist%20one (espacios en url es con %20)
+    #[Route('/playlistCancion/buscar/{nombre}', name: 'app_playlist_cancion_buscar', methods: ['GET'])]
+    public function cancionesDePlaylistNombre(string $nombre, EntityManagerInterface $entity): JsonResponse
     {
-        $playlistCancionRepo = $entity->getRepository(PlaylistCancion::class);
         $playlistRepo = $entity->getRepository(Playlist::class);
-        $playlistNombre = $playlistRepo->getNombre();
-        
-        $playlistCancion = $playlistCancionRepo->cancionesByPlaylistNombre($playlistNombre);
+        $playlistCancionRepo = $entity->getRepository(PlaylistCancion::class);
 
-        //persist
-        $entity->persist($playlistCancion);
-        $entity->flush();
+        // Buscar la playlist por nombre
+        $playlist = $playlistRepo->findOneBy(['nombre' => $nombre]);
 
+        // Obtener las canciones de la playlist
+        $playlistCancion = $playlistCancionRepo->findBy(['playlist' => $playlist]);
 
         $data = [];
-        foreach ($playlistCancion as $canciones) {
+        foreach ($playlistCancion as $cancion) {
+            // Solo agregamos las canciones relacionadas con esa playlist
             $data[] = [
-                'titulo' => $canciones->getCancion(),
+                'titulo' => $cancion->getCancion()->getTitulo(),
             ];
         }
 
@@ -74,4 +74,27 @@ final class PlaylistCancionController extends AbstractController
     }
 
 
+    #[Route('/playlistCancion/buscar/{id}', name: 'app_playlist_cancion_buscar', methods: ['GET'])]
+    public function cancionesDePlaylistId(int $id, EntityManagerInterface $entity): JsonResponse
+    {
+        $playlistRepo = $entity->getRepository(Playlist::class);
+        $playlistCancionRepo = $entity->getRepository(PlaylistCancion::class);
+
+        //buscar por id
+        $playlist = $playlistRepo->find($id);
+
+        //coger las canciones de la playlist
+        $playlistCancion = $playlistCancionRepo->findBy(['playlist' => $playlist]);
+
+        $data = [];
+        foreach ($playlistCancion as $cancion) {
+            $data[] = [
+                'titulo' => $cancion->getCancion()->getTitulo(),
+            ];
+        }
+
+        return $this->json($data);
+    }
+
+    
 }
