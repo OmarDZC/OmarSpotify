@@ -48,4 +48,30 @@ final class PlaylistCancionController extends AbstractController
             'path' => 'src/Controller/PlaylistCancionController.php',
         ]);
     }
+
+    #[Route('/playlistCancion/buscar', name: 'app_playlist_cancion_new', methods: ['GET'])]
+    public function cancionesDePlaylist(EntityManagerInterface $entity): JsonResponse
+    {
+        $playlistCancionRepo = $entity->getRepository(PlaylistCancion::class);
+        $playlistRepo = $entity->getRepository(Playlist::class);
+        $playlistNombre = $playlistRepo->getNombre();
+        
+        $playlistCancion = $playlistCancionRepo->cancionesByPlaylistNombre($playlistNombre);
+
+        //persist
+        $entity->persist($playlistCancion);
+        $entity->flush();
+
+
+        $data = [];
+        foreach ($playlistCancion as $canciones) {
+            $data[] = [
+                'titulo' => $canciones->getCancion(),
+            ];
+        }
+
+        return $this->json($data);
+    }
+
+
 }

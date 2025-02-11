@@ -26,5 +26,7 @@ class PlaylistCancionCrudController extends AbstractCrudController
             AssociationField::new('cancion', 'Cancion')->setFormTypeOption('by_reference',true),
         ];
     }
+
+    
    
 }

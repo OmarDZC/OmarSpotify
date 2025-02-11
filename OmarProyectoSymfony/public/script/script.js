@@ -48,6 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("nombreCancion").textContent = nombreCancion;
             document.getElementById("nombreArtista").textContent = nombreArtista;
             document.getElementById("audioCancion").style.visibility = "visible";
+            document.getElementById("reproductor").style.visibility = "visible";
 
             //reproduce la cancion
             document.getElementById("audioCancion").play();

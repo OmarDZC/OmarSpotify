@@ -109,6 +109,11 @@
     }
 }
 
+#irBiblioteca {
+    text-decoration: none;
+    color: #fff;
+}
+
 #listaNav{
     background-color: #5b5c5c;
     width: 100%;
@@ -210,6 +215,7 @@
     font-size: 14px;
     color: #777;
 }
+
 
 #playlistList {
     display: grid;

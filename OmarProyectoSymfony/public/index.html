@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"> -->
     <title>Document</title>
 </head>
+
 <body>
     <header id="containerHeader">
         <div id="titulo">
@@ -28,7 +30,7 @@
         <nav id="containerNav">
             <div id="tuBiblioteca">
                 <img src="images/biblioteca-de-musica.png" alt="biblioteca">
-                <span>Tu Biblioteca</span>
+                <span><a id="irBiblioteca" href="index.html">Tu Biblioteca</a></span>
             </div>
             <div id="listaNav">
                 <ul>
@@ -43,46 +45,35 @@
                 </ul>
             </div>
         </nav>
-    
+
         <div id="containerBody">
             <div id="tituloCanciones">
-                <h2>Tu spotify</h2>
+                <h2>Tus Playlist</h2>
             </div>
-
+            
             <div id="playlistList">
-                <article class="playlistItem">
-                    <h3>Playlist</h3>
-                    <p>Propietario: Nombre</p>
-                </article>
-            </div><br><br>
 
-            <hr>
-
+            </div>
+        
+            <div id="tituloCanciones">
+                <h2>Tus Canciones</h2>
+            </div>
+        
             <div id="cancionesList">
-                <article class="cancionItem">
-                    <h3>Canción 1</h3>
-                    <p>Artista: Nombre</p>
-                </article>
-                <article class="cancionItem">
-                    <h3>Canción 2</h3>
-                    <p>Artista: Nombre</p>
-                </article>
-                <article class="cancionItem">
-                    <h3>Canción 3</h3>
-                    <p>Artista: Nombre</p>
-                </article>
-            </div>
-            <div id="indexList">
-            </div>
+                <!-- Aquí se llenarán las canciones dinámicamente -->
+            </div> 
+        
+            <div id="indexList"></div>
         </div>
+        
     </div>
-    
+
     <footer id="footer">
-        <div id="reproductor" style="visibility: hidden;">
+        <div id="reproductor">
             <div id="info">
                 <div id="detallesCancion">
-                    <span id="nombreCancion">Canción 1</span>
-                    <span id="nombreArtista">Artista: Nombre</span>
+                    <span id="nombreCancion"></span>
+                    <span id="nombreArtista"></span>
                 </div>
             </div>
             <div id="audioContainer">
@@ -90,10 +81,10 @@
             </div>
         </div>
     </footer>
-    
+
 
     <script src="script/script.js"></script>
     <script src="script/scriptPlaylist.js"></script>
 </body>
-</html>
 
+</html>
