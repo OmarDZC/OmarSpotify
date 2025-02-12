@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //reproduce musica al clicar la cancion correspondiente
     document.getElementById("cancionesList").addEventListener("click", function (event) {
-        let cancionSeleccionada = event.target;
+        let cancionSeleccionada = event.target; //elemento exacto que se clico
         while (cancionSeleccionada && !cancionSeleccionada.classList.contains("cancionItem")) {
             cancionSeleccionada = cancionSeleccionada.parentElement;
         }
