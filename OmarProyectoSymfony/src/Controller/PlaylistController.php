@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Perfil;
 use App\Entity\Playlist;
 use App\Entity\Usuario;
+use App\Repository\CancionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -68,16 +69,24 @@ final class PlaylistController extends AbstractController
     public function mostrarCancionesPorNombre($nombre, EntityManagerInterface $entityManager): JsonResponse
     {
         $playlistRepo = $entityManager->getRepository(Playlist::class);
-        $playlist = $playlistRepo->findOneBy(['nombre' => $nombre]); // Buscar por nombre
+        $playlist = $playlistRepo->findOneBy(['nombre' => $nombre]);
 
         $canciones = [];
         foreach ($playlist->getPlaylistCanciones() as $playlistCancion) {
-            $canciones[] = $playlistCancion->getCancion()->getTitulo(); // Obtener solo el título de la canción
+            $canciones[] = $playlistCancion->getCancion()->getTitulo();
         }
 
         return $this->json([
             'nombre' => $playlist->getNombre(),
-            'canciones' => $canciones, // Listado de canciones
+            'canciones' => $canciones,
         ]);
     }
+
+
+    
+    
+
+
+
+
 }

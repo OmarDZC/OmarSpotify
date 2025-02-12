@@ -50,21 +50,20 @@ final class PlaylistCancionController extends AbstractController
     }
 
     //se buscaria como playlist%20one (espacios en url es con %20)
-    #[Route('/playlistCancion/buscar/{nombre}', name: 'app_playlist_cancion_buscar', methods: ['GET'])]
-    public function cancionesDePlaylistNombre(string $nombre, EntityManagerInterface $entity): JsonResponse
+    #[Route('/cancionesPlaylist/{nombre}', name: 'mostrar_canciones_playlist')]
+    public function mostrarCancionesDePlaylist(EntityManagerInterface $entity, $nombre)
     {
-        $playlistRepo = $entity->getRepository(Playlist::class);
         $playlistCancionRepo = $entity->getRepository(PlaylistCancion::class);
+        $playlistRepo = $entity->getRepository(Playlist::class);
 
-        // Buscar la playlist por nombre
-        $playlist = $playlistRepo->findOneBy(['nombre' => $nombre]);
+        //buscar por nombre
+        $playlist = $playlistRepo->findOneByNombre($nombre);
 
-        // Obtener las canciones de la playlist
-        $playlistCancion = $playlistCancionRepo->findBy(['playlist' => $playlist]);
+        //repository creado
+        $cancionesbyPlaylist = $playlistCancionRepo->cancionesByPlaylistNombre($playlist);
 
         $data = [];
-        foreach ($playlistCancion as $cancion) {
-            // Solo agregamos las canciones relacionadas con esa playlist
+        foreach ($cancionesbyPlaylist as $cancion) {
             $data[] = [
                 'titulo' => $cancion->getCancion()->getTitulo(),
             ];

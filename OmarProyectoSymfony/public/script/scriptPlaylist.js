@@ -29,12 +29,10 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
     //evento para la pulsar en playlist y nos lleve a otra pag y saque las canciones de dicha playlist
-    contenedor.addEventListener("click", cancionesPlaylist);
-
-    function cancionesPlaylist() {
+    document.querySelectorAll(".playlist-item").forEach(item =>{
         window.location.href = "cancionesPlaylist.html";
-    }
-
+    })
+    
     
 
 
