@@ -4,14 +4,23 @@ security:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
-        users_in_memory: { memory: null }
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             lazy: true
-            provider: users_in_memory
+            provider: app_user_provider
+            form_login:
+                # "app_login" is the name of the route created previously
+                login_path: app_login
+                check_path: app_login
+                # admiten URL´s y nombres de ruta (pero no pueden tener comodines, por ejemplo, /login/{foo}
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
@@ -22,9 +31,23 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/admin, roles: ROLE_ADMIN } # Solo usuarios con ROLE_ADMIN pueden acceder a /admin
+        - { path: ^/profile, roles: ROLE_USER } # Solo usuarios con ROLE_USER pueden acceder a /user
 
+        # matches /admin/users/*
+        - { path: '^/admin/users', roles: ROLE_SUPER_ADMIN }
+        # matches /admin/* except for anything matching the above rule
+        - { path: '^/admin', roles: ROLE_ADMIN }
+
+        # allow unauthenticated users to access the login form
+        - { path: ^/admin/login, roles: PUBLIC_ACCESS }
+        
+
+
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER #los que tengan rol admin tambien tendran el de user
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH] # con rol superadmin será heredado
+        
 when@test:
     security:
         password_hashers:

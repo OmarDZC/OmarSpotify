@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+<h1>Registro</h1>
+{{ form_start(registrationForm) }}
+{{ form_widget(registrationForm) }}
+<button class="btn">Registrar</button>
+
+{{ form_end(registrationForm) }}
+{% endblock %}
+
+{# Comentario: se puede usar registrationForm.email para dif el email del resto #} 
