@@ -22,6 +22,11 @@ security:
                 check_path: app_login
                 # admiten URL´s y nombres de ruta (pero no pueden tener comodines, por ejemplo, /login/{foo}
 
+            logout:
+                path: /logout
+                target: /login
+            
+
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
 

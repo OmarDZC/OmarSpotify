@@ -25,7 +25,7 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $nombre = null;
+    private ?string $nombre;
 
     #[ORM\Column(type: "datetime", nullable: true)]
     private ?\DateTimeInterface $fechaNacimiento = null;
@@ -185,7 +185,7 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __toString(): string
     {
-        return $this->getNombre();
+        return $this->getNombre() ?? ''; //retorna null
     }
 
     /** Métodos de UserInterface **/

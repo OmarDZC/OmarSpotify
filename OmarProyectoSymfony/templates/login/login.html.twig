@@ -14,4 +14,9 @@
 <input type="hidden" name="_target_path" value="/account"> #}
 <button type="submit">login</button>
 </form>
+
+ {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <!-- Este enlace de logout solo se muestra si el usuario está autenticado -->
+        <a href="{{ path('logout') }}">Logout</a>
+    {% endif %}
 {% endblock %}
