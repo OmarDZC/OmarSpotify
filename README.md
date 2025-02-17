@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # MYSPOTIFY
 Realizado por Omar Daza
 
