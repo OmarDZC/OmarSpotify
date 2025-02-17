@@ -116,27 +116,33 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     
         //reproduce musica al clicar
-        document.getElementById("playlistList").addEventListener("click", function (event) {
+        document.body.addEventListener("click", function (event) {
             let cancionSeleccionada = event.target;
+            
             while (cancionSeleccionada && !cancionSeleccionada.classList.contains("cancionItem")) {
                 cancionSeleccionada = cancionSeleccionada.parentElement;
             }
+        
             if (cancionSeleccionada) {
+                console.log("✅ Clic detectado en:", cancionSeleccionada);
+        
                 const audioSrc = cancionSeleccionada.dataset.audio;
-                const nombreCancion = cancionSeleccionada.querySelector("h3").textContent;
-                const nombreArtista = cancionSeleccionada.querySelector("p").textContent;
-    
-                //footer
-                document.getElementById("audioCancion").src = audioSrc;
-                document.getElementById("nombreCancion").textContent = nombreCancion;
-                document.getElementById("nombreArtista").textContent = nombreArtista;
-                document.getElementById("audioCancion").style.visibility = "visible";
-                document.getElementById("reproductor").style.visibility = "visible";
-    
-                //reproducri
-                document.getElementById("audioCancion").play();
+                const nombreCancion = cancionSeleccionada.querySelector("h3")?.textContent;
+                const nombreArtista = cancionSeleccionada.querySelector("p")?.textContent;
+        
+                const audioElement = document.getElementById("audioCancion");
+                if (audioElement) {
+                    audioElement.src = audioSrc;
+                    document.getElementById("nombreCancion").textContent = nombreCancion;
+                    document.getElementById("nombreArtista").textContent = nombreArtista;
+                    
+                    audioElement.play().catch(error => console.error("❌ Error al reproducir:", error));
+                } else {
+                    console.error("❌ No se encontró el elemento de audio.");
+                }
             }
         });
+        
 
     document.getElementById('iconoMusic').parentElement.addEventListener('click', () => {
         window.location.href = 'canciones.html';
