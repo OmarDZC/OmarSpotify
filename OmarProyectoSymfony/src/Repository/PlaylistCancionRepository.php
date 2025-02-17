@@ -40,13 +40,24 @@ class PlaylistCancionRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
-    
-    public function cancionesByPlaylistNombre($playlist){
+
+    public function cancionesByPlaylistNombre($playlist)
+    {
         return $this->createQueryBuilder('p')
-               ->andWhere('p.playlist = :val')
-               ->setParameter('val', $playlist)
-               ->getQuery()
-               ->getResult()
-           ;
+            ->andWhere('p.playlist = :val')
+            ->setParameter('val', $playlist)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function obtenerReproduccionesPorPlaylist(): array
+    {
+        return $this->createQueryBuilder('pc')
+            ->select('p.nombre AS playlist, SUM(pc.reproducciones) AS totalReproducciones')
+            ->innerJoin('pc.playlist', 'p')
+            ->groupBy('p.id')
+            ->getQuery()
+            ->getResult();
     }
 }

@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Estadísticas
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h2>Estadísticas de Reproducciones por Playlist</h2>
+        <canvas id="reproduccionesChart"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <script>
+        // Se ejecuta cuando la página ha terminado de cargarse
+        document.addEventListener("DOMContentLoaded", function () {
+            
+            // Hace una solicitud HTTP GET a la URL que devuelve la ruta generada por Symfony
+            fetch("{{ path('estadisticas_datos') }}")
+                .then(response => response.json())
+                .then(data => {
+                    const labels = data.map(item => item.playlist);
+                    const values = data.map(item => item.totalReproducciones);
+                    const ctx = document.getElementById('reproduccionesChart').getContext('2d');
+                    
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Total Reproducciones',
+                                data: values,
+                                backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                                borderColor: 'rgba(54, 162, 235, 1)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                });
+        });
+    </script>
+{% endblock %}

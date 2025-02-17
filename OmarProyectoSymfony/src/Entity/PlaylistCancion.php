@@ -16,7 +16,7 @@ class PlaylistCancion
     #[ORM\ManyToOne(inversedBy: 'playlistCanciones')]
     private ?Playlist $playlist = null;
 
-    #[ORM\ManyToOne(inversedBy: 'cancion')]
+    #[ORM\ManyToOne(inversedBy: 'playlistCanciones')]
     private ?Cancion $cancion = null;
 
     public function __toString()
