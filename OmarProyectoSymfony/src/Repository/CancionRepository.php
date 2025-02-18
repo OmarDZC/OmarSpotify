@@ -40,4 +40,24 @@ class CancionRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
+
+    //MANAGER:: canciones mas escuchadas
+    public function topCancionesMasReproducidas(): array
+    {
+        return $this->createQueryBuilder('c')
+            ->orderBy('c.reproducciones', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    //MANAGER:: reproducciones por genero
+    public function reproduccionesPorGenero()
+    {
+        return $this->createQueryBuilder('c')
+            ->select('g.nombre AS genero, SUM(c.reproducciones) AS totalReproducciones')
+            ->innerJoin('c.genero', 'g')
+            ->groupBy('g.nombre')
+            ->getQuery()
+            ->getResult();
+    }
 }

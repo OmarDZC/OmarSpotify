@@ -31,8 +31,8 @@ class Cancion
     #[ORM\JoinColumn(nullable: false)]
     private ?Estilo $genero = null;
 
-    /* #[ORM\Column]
-    private ?int $reproducciones = null; */
+    #[ORM\Column]
+    private ?int $reproducciones = null;
 
     #[ORM\Column]
     private ?int $likes = null;
@@ -48,6 +48,7 @@ class Cancion
     public function __toString()
     {
         return $this->titulo;
+        $this->reproducciones = 0;
     }
 
 
@@ -128,7 +129,7 @@ class Cancion
         return $this;
     }
 
-    /* public function getReproducciones(): ?int
+    public function getReproducciones(): ?int
     {
         return $this->reproducciones;
     }
@@ -138,7 +139,7 @@ class Cancion
         $this->reproducciones = $reproducciones;
 
         return $this;
-    } */
+    }
 
     public function getLikes(): ?int
     {

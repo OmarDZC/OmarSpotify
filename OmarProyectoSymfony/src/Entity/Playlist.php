@@ -25,11 +25,12 @@ class Playlist
     #[ORM\JoinColumn(nullable: true)]
     private ?Usuario $propietario = null;
 
-    /* #[ORM\Column]
-    private ?int $reproducciones = null; */
+    #[ORM\Column]
+    private ?int $reproducciones = 0;  // Asigna un valor por defecto de 0
 
     #[ORM\Column]
     private ?int $likes = null;
+    
 
     /**
      * @var Collection<int, PlaylistCancion>
@@ -51,6 +52,7 @@ class Playlist
     {
         $this->usuarioPlaylists = new ArrayCollection();
         $this->playlistCanciones = new ArrayCollection();
+        $this->reproducciones = 0;
     }
 
     public function getId(): ?int
@@ -94,7 +96,7 @@ class Playlist
         return $this;
     }
 
-    /* public function getReproducciones(): ?int
+    public function getReproducciones(): ?int
     {
         return $this->reproducciones;
     }
@@ -104,7 +106,7 @@ class Playlist
         $this->reproducciones = $reproducciones;
 
         return $this;
-    } */
+    }
 
     public function getLikes(): ?int
     {

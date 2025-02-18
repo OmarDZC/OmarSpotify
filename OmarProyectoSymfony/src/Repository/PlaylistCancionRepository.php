@@ -51,13 +51,16 @@ class PlaylistCancionRepository extends ServiceEntityRepository
         ;
     }
 
-    public function obtenerReproduccionesPorPlaylist(): array
+    /* public function obtenerReproduccionesPorPlaylist(): array
     {
         return $this->createQueryBuilder('pc')
-            ->select('p.nombre AS playlist, SUM(pc.reproducciones) AS totalReproducciones')
-            ->innerJoin('pc.playlist', 'p')
+            ->select('p.nombre AS playlist')
+            ->join('pc.playlist', 'p')
             ->groupBy('p.id')
             ->getQuery()
             ->getResult();
-    }
+    } */
+
+
+    
 }

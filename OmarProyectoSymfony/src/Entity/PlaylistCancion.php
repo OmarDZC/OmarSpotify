@@ -24,12 +24,12 @@ class PlaylistCancion
         return $this->getCancion()->getTitulo(); //obtener titulo de la cancion
     }
 
-    #[ORM\Column]
-    private ?int $reproducciones = null;
+    /* #[ORM\Column]
+    private ?int $reproducciones = null; */
 
     public function __construct()
     {
-        $this->reproducciones = 0; //por defecto
+        /* $this->reproducciones = 0; //por defecto */
     }
 
 
@@ -62,7 +62,7 @@ class PlaylistCancion
         return $this;
     }
 
-    public function getReproducciones(): ?int
+    /* public function getReproducciones(): ?int
     {
         return $this->reproducciones;
     }
@@ -72,5 +72,5 @@ class PlaylistCancion
         $this->reproducciones = $reproducciones;
 
         return $this;
-    }
+    } */
 }

@@ -31,13 +31,22 @@ class UsuarioRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-       public function findByNombre($nombre): ?Usuario
-       {
-           return $this->createQueryBuilder('u')
-               ->andWhere('u.nombre = :val')
-               ->setParameter('val', $nombre)
-               ->getQuery()
-               ->getOneOrNullResult()
-           ;
-       }
+    public function findByNombre($nombre): ?Usuario
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.nombre = :val')
+            ->setParameter('val', $nombre)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
+    //MANAGER:: edades usuario
+    public function obtenerFechasDeNacimiento(): array
+    {
+        return $this->createQueryBuilder('u')
+            ->select('u.fechaNacimiento')  // Solo seleccionamos la fecha de nacimiento
+            ->getQuery()
+            ->getResult();
+    }
 }
