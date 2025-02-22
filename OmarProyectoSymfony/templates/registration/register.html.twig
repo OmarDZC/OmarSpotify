@@ -1,12 +1,98 @@
 {% extends 'base.html.twig' %}
 {% block body %}
+<style>
+    /* Contenedor del formulario */
+    #registration-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f4f7fc; /* Fondo suave */
+        font-family: Arial, sans-serif;
+    }
 
-<h1>Registro</h1>
-{{ form_start(registrationForm) }}
-{{ form_widget(registrationForm) }}
-<button class="btn">Registrar</button>
+    /* Estilos generales del formulario */
+    form {
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
 
-{{ form_end(registrationForm) }}
+    /* Estilos para los títulos */
+    h1 {
+        text-align: center;
+        color: #333;
+        font-size: 28px;
+        margin-bottom: 30px;
+    }
+
+    /* Estilos para las etiquetas de los inputs */
+    form label {
+        font-size: 16px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 5px;
+    }
+
+    /* Estilo de los inputs */
+    form input {
+        width: 100%;
+        padding: 12px;
+        margin-top: 8px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        background-color: #fafafa;
+        color: #333;
+        transition: all 0.3s ease;
+    }
+
+    form input:focus {
+        border-color: #4CAF50; /* Color verde cuando el campo está en foco */
+        background-color: #fff;
+    }
+
+    /* Estilo del botón de registrar */
+    form button {
+        width: 100%;
+        padding: 12px;
+        background-color: #4CAF50;
+        border: none;
+        border-radius: 5px;
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    form button:hover {
+        background-color: #45a049; /* Botón más oscuro al pasar el ratón */
+    }
+
+    /* Estilo para los errores */
+    div.error {
+        color: red;
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+</style>
+
+<div id="registration-container">
+    <form action="{{ path('app_register') }}" method="post">
+        <h1>Registro</h1>
+        {{ form_start(registrationForm) }}
+        {{ form_widget(registrationForm) }}
+        <button type="submit" class="btn">Registrar</button>
+        {{ form_end(registrationForm) }}
+    </form>
+</div>
+
 {% endblock %}
-
-{# Comentario: se puede usar registrationForm.email para dif el email del resto #} 

@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<header id="containerHeader">
+    <div id="titulo">
+        <img src="images/logo.png" alt="logoSpotify" id="logoSpotify">
+    </div>
+    <div id="busqueda">
+        <div class="inputContainer">
+            <input type="text" name="buscarCancion" id="buscarCancion" placeholder="¿Qué quieres reproducir?">
+            <img src="images/lupa.png" alt="lupa" class="iconoLupa">
+        </div>
+        <input type="submit" value="Buscar" id="btnBuscar">
+    </div>
+    <div id="registro">
+        <span>Bienvenido, {{ username }}</span>
+        <form action="{{ path('app_logout') }}" method="post">
+            <button type="submit">Cerrar sesión</button>
+        </form>
+    </div>
+</header>
+
+<div id="mainContainer">
+    <nav id="containerNav">
+        <div id="tuBiblioteca">
+            <img src="images/biblioteca-de-musica.png" alt="biblioteca">
+            <span><a id="irBiblioteca" href="{{ path('app_biblioteca') }}">Tu Biblioteca</a></span>
+        </div>
+        <div id="listaNav">
+            <ul>
+                <li>
+                    <img src="images/iconoMusic.png" alt="iconomusic" id="iconoMusic">
+                    <a href="{{ path('app_canciones') }}">Canciones</a>
+                </li>
+                <li>
+                    <img src="images/iconoPlaylist.png" alt="iconoPlaylist" id="iconoPlaylist">
+                    <a href="{{ path('app_playlist') }}">Playlist</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="containerBody">
+        <div id="tituloCanciones">
+            <h2>Tus Playlist</h2>
+        </div>
+        
+        <div id="playlistList"></div>
+    
+        <div id="tituloCanciones">
+            <h2 id="h2Canciones">Tus Canciones</h2>
+        </div>
+    
+        <div id="cancionesList"></div>
+    </div>
+</div>
+
+<footer id="footer">
+    <div id="reproductor">
+        <div id="info">
+            <div id="detallesCancion">
+                <span id="nombreCancion"></span>
+                <span id="nombreArtista"></span>
+            </div>
+        </div>
+        <div id="audioContainer">
+            <audio id="audioCancion" src="#" preload="auto" controls></audio>
+        </div>
+    </div>
+</footer>
+
+<script src="{{ asset('script/index.js') }}"></script>
+{% endblock %}
