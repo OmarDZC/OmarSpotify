@@ -93,13 +93,6 @@ input[type="submit"]:hover {
     box-shadow: 0px 0px 20px rgba(0, 255, 255, 0.8);
 }
 
-
-
-
-
-
-
-
 /* Contenedor principal */
 #mainContainer {
     display: flex;
@@ -333,6 +326,170 @@ audio {
 }
 
 
+/* RESPONSIVE */
+/* Responsive */
+@media screen and (max-width: 1200px) {
+    #containerHeader {
+        padding: 10px 15px;
+        height: 70px;
+    }
 
+    #busqueda #buscarCancion {
+        width: 200px;
+    }
 
+    #containerNav {
+        width: 150px;
+        padding: 15px;
+    }
 
+    #listaNav ul {
+        padding-left: 10px;
+    }
+
+    #listaNav li {
+        font-size: 18px;
+    }
+
+    #indexList, #cancionesList, #playlistList {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+    }
+
+    .cancionItem, .playlistItem {
+        padding: 100px 60px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #containerHeader {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+    }
+
+    #titulo {
+        width: 40px;
+    }
+
+    #busqueda {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    #buscarCancion {
+        width: 100%;
+    }
+
+    #btnBuscar {
+        margin-left: 0;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    #containerNav {
+        width: 100%;
+        padding: 10px;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    #tuBiblioteca {
+        font-size: 18px;
+    }
+
+    #listaNav {
+        width: 100%;
+        flex-direction: column;
+        margin-top: 20px;
+    }
+
+    #indexList, #cancionesList, #playlistList {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .cancionItem, .playlistItem {
+        padding: 80px 40px;
+    }
+
+    #footer {
+        padding: 10px 15px;
+    }
+
+    #reproductor {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    audio {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #containerHeader {
+        padding: 10px;
+        height: auto;
+    }
+
+    #titulo {
+        width: 30px;
+    }
+
+    #busqueda {
+        flex-direction: column;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    #buscarCancion {
+        width: 100%;
+        padding-left: 25px;
+    }
+
+    #btnBuscar {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    #containerNav {
+        width: 100%;
+        padding: 10px;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    #tuBiblioteca {
+        font-size: 16px;
+    }
+
+    #listaNav {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    #indexList, #cancionesList, #playlistList {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 20px;
+    }
+
+    .cancionItem, .playlistItem {
+        padding: 60px 30px;
+    }
+
+    #footer {
+        padding: 10px;
+    }
+
+    #reproductor {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    audio {
+        width: 100%;
+    }
+}
