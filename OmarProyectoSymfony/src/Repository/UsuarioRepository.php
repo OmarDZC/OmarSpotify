@@ -49,4 +49,14 @@ class UsuarioRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    //sacar el email del usuario logeado/registrado
+    public function findByEmail(string $email): ?Usuario
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.email = :email')
+            ->setParameter('email', $email)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

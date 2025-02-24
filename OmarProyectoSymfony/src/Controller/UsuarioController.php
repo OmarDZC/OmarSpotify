@@ -4,11 +4,16 @@ namespace App\Controller;
 
 use App\Entity\Perfil;
 use App\Entity\Usuario;
+use App\Repository\UsuarioRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Core\Security;
+
+
 
 final class UsuarioController extends AbstractController
 {
@@ -40,10 +45,35 @@ final class UsuarioController extends AbstractController
         $entity->persist($usuario);
         $entity->flush();
 
-        
+
         return $this->json([
             'message' => 'Welcome to your new controller!',
             'path' => 'src/Controller/PerfilController.php',
         ]);
+    }
+
+    #[Route('/getUsuario', name: 'api_get_usuario', methods: ['GET'])]
+    public function getUsuario(Request $request, UsuarioRepository $usuarioRepo): JsonResponse
+    {
+        // Obtener el correo electrónico del usuario desde el parámetro de consulta
+        $email = $request->query->get('email');
+
+        // Buscar el usuario por correo electrónico
+        $usuario = $usuarioRepo->findByEmail($email);
+
+        return new JsonResponse(['nombre' => $usuario->getNombre()]);
+    }
+
+
+    #[Route('/isLoggedIn', name: 'api_is_logged_in', methods: ['GET'])]
+    public function isLoggedIn(Security $security): JsonResponse
+    {
+        $usuario = $security->getUser();
+
+        if ($usuario) {
+            return new JsonResponse(['isLoggedIn' => true, 'nombre' => $usuario->getNombre()]);
+        }
+
+        return new JsonResponse(['isLoggedIn' => false]);
     }
 }
