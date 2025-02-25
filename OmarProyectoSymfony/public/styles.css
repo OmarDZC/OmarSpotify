@@ -325,8 +325,55 @@ audio {
     padding: 5px;
 }
 
+/*boton de logout*/
 
-/* RESPONSIVE */
+
+#logoutBtn {
+    background: linear-gradient(135deg, #1DB954, #121212); /* Fondo gradiente */
+    color: white; /* Texto blanco */
+    font-size: 18px; /* Tamaño de fuente */
+    font-weight: bold; /* Negrita */
+    border: none; /* Sin borde */
+    padding: 12px 30px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    cursor: pointer; /* Puntero al pasar */
+    transition: all 0.3s ease-in-out; /* Transición suave */
+    box-shadow: 0px 0px 10px rgba(255, 0, 255, 0.6); /* Sombra */
+    margin-top: 10px; /* Margen superior */
+    text-align: center; /* Centrar el texto */
+}
+
+#logoutBtn:hover {
+    transform: scale(1.1); /* Efecto hover (ampliación) */
+    box-shadow: 0px 0px 20px rgba(0, 255, 255, 0.8); /* Sombra más grande en hover */
+}
+
+
+
+/*boton de añadir playlist*/
+#plusBtn {
+    background-color: #5b5c5c;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+#plusBtn:hover {
+    background-color: #1DB954;
+}
+
+
+
 /* Responsive */
 @media screen and (max-width: 1200px) {
     #containerHeader {

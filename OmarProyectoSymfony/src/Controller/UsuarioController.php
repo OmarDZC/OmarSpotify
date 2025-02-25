@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Bundle\SecurityBundle\Security;
 
 
 
@@ -65,13 +65,17 @@ final class UsuarioController extends AbstractController
     }
 
 
-    #[Route('/isLoggedIn', name: 'api_is_logged_in', methods: ['GET'])]
+    #[Route('/logeado', name: 'api_is_logged_in', methods: ['GET'])]
     public function isLoggedIn(Security $security): JsonResponse
     {
         $usuario = $security->getUser();
 
         if ($usuario) {
-            return new JsonResponse(['isLoggedIn' => true, 'nombre' => $usuario->getNombre()]);
+            return new JsonResponse([
+                'isLoggedIn' => true,
+                'nombre' => $usuario->getNombre(),
+                'email' => $usuario->getEmail() //funciona y devuelve el nombre y email
+            ]);
         }
 
         return new JsonResponse(['isLoggedIn' => false]);

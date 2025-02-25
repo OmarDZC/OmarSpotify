@@ -198,6 +198,37 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+    //SI EL USUARIO SE LOGEA CAMBIA LA PAGINA
+    fetch('/logeado')
+    .then(response => response.json())
+    .then(data => {
+        const loginBtn = document.getElementById('loginBtn');
+        const registroBtn = document.getElementById('registroBtn');
+        const logoutLink = document.getElementById('logoutLink'); // Contenedor del logout
+        const plusBtn = document.getElementById('plusBtn');
+        const signomas = document.getElementById('signomas');
+
+        if (data.isLoggedIn) {
+            // Mostrar logout y el botón para añadir playlist
+            loginBtn.style.display = 'none';
+            registroBtn.style.display = 'none';
+            logoutLink.style.display = 'block'; // Mostrar el contenedor de logout
+            plusBtn.style.display = 'block';
+            signomas.style.display = 'block';
+        } else {
+            // Mostrar login y registro
+            loginBtn.style.display = 'block';
+            registroBtn.style.display = 'block';
+            logoutLink.style.display = 'none'; // Ocultar el contenedor de logout
+            plusBtn.style.display = 'none';
+            signomas.style.display = 'none';
+        }
+    });
+
+
+
+
+
 
 
 
