@@ -82,11 +82,33 @@ final class PlaylistController extends AbstractController
         ]);
     }
 
+    //SACAR LAS PLAYLIST CREADAS POR USUARIO
+    #[Route('/playlist/misPlaylists', name: 'app_playlist_mis_playlists', methods: ['GET'])]
+    public function obtenerPlaylistsUsuarioActual(EntityManagerInterface $entityManager): JsonResponse
+    {
+        //obtener usuario autenticado
+        $usuario = $this->getUser();
 
-    
-    
+        //verifica si esta autenticado
+        if (!$usuario) {
+            return $this->json(['message' => 'No estás autenticado'], 401);
+        }
+
+        //obtener playlist del usuario logeado
+        $playlistRepo = $entityManager->getRepository(Playlist::class);
+        $playlists = $playlistRepo->findBy(['propietario' => $usuario]);
 
 
+        $data = [];
+        foreach ($playlists as $playlist) {
+            $data[] = [
+                'nombre' => $playlist->getNombre(),
+                'visibilidad' => $playlist->getVisibilidad(),
+                'likes' => $playlist->getLikes(),
+                'canciones' => $playlist->getPlaylistCanciones()->count(),
+            ];
+        }
 
-
+        return $this->json($data);
+    }
 }

@@ -215,6 +215,29 @@ document.addEventListener("DOMContentLoaded", function () {
             logoutLink.style.display = 'block'; // Mostrar el contenedor de logout
             plusBtn.style.display = 'block';
             signomas.style.display = 'block';
+
+            fetch('/playlist/misPlaylist')
+                .then(response => response.json())
+                .then(playlists => {
+                    console.log('Playlists del usuario:', playlists);
+                    
+                    // Limpiar contenedor antes de mostrar nuevas playlists
+                    playlistContainer.innerHTML = '';
+
+                    // Recorrer las playlists y agregarlas al contenedor
+                    playlists.forEach(playlist => {
+                        const item = document.createElement('div');
+                        item.classList.add('playlist-item');
+                        item.innerHTML = `
+                            <h3>${playlist.nombre}</h3>
+                            <p>Visibilidad: ${playlist.visibilidad}</p>
+                            <p>Likes: ${playlist.likes}</p>
+                            <p>Número de canciones: ${playlist.canciones}</p>
+                        `;
+                        playlistContainer.appendChild(item);
+                    });
+                })
+
         } else {
             // Mostrar login y registro
             loginBtn.style.display = 'block';
@@ -226,6 +249,12 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
+    const plusBtn = document.querySelector('#plusBtn');
+    plusBtn.addEventListener('click', function() {
+        // Redirigir a la ruta de la playlist
+        window.location.href = '/crearPlayli'; // Aquí debes colocar la ruta correcta para el formulario
+    });
+    
 
 
 

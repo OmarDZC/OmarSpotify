@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Crear Playlist{% endblock %}
+
+{% block body %}
+    <div class="playlist-container">
+        <h1>Crear una nueva Playlist</h1>
+
+        {{ form_start(form, {'attr': {'class': 'form-playlist'}}) }}
+
+        <div class="form-group">
+            {{ form_label(form.nombre) }}
+            {{ form_widget(form.nombre, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.visibilidad) }}
+            {{ form_widget(form.visibilidad, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="form-group">
+            
+            <div id="playlist-canciones" data-prototype="{{ form_widget(form.playlistCanciones.vars.prototype)|e('html_attr') }}">
+                {% for cancionForm in form.playlistCanciones %}
+                    <div class="playlist-cancion-item">
+                        {{ form_row(cancionForm) }}
+                        <button type="button" class="btn-remove-cancion">Eliminar</button>
+                    </div>
+                {% endfor %}
+            </div>
+            <button type="button" class="btn-add-cancion">Añadir Canción</button>
+        </div>
+
+        <button type="submit" class="btn-submit">Guardar Playlist</button>
+
+        {{ form_end(form) }}
+
+        <a href="{{ path('app_playlist_form') }}" class="btn-back">Volver</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const btnAdd = document.querySelector('.btn-add-cancion');
+            const container = document.querySelector('#playlist-canciones');
+            let index = container.children.length;
+
+            btnAdd.addEventListener('click', function() {
+                const prototype = container.dataset.prototype;
+                if (!prototype) {
+                    console.error("Error: El atributo data-prototype no está definido.");
+                    return;
+                }
+
+                const newForm = prototype.replace(/__name__/g, index);
+                const newElement = document.createElement('div');
+                newElement.classList.add('playlist-cancion-item');
+                newElement.innerHTML = newForm + '<button type="button" class="btn-remove-cancion">Eliminar</button>';
+                container.appendChild(newElement);
+                index++;
+
+                newElement.querySelector('.btn-remove-cancion').addEventListener('click', function() {
+                    newElement.remove();
+                });
+            });
+
+            document.querySelectorAll('.btn-remove-cancion').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    this.parentElement.remove();
+                });
+            });
+        });
+    </script>
+
+{% endblock %}
