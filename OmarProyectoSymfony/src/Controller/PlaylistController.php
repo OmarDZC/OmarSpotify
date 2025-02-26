@@ -57,13 +57,15 @@ final class PlaylistController extends AbstractController
             $data[] = [
                 'nombre' => $playlist->getNombre(),
                 'visibilidad' => $playlist->getVisibilidad(),
-                'propietario' => $playlist->getPropietario() ? $playlist->getPropietario()->getId() : null,
+                // Cambiar de obtener el ID del propietario a obtener su nombre
+                'propietario' => $playlist->getPropietario() ? $playlist->getPropietario()->getNombre() : null,
                 'likes' => $playlist->getLikes(),
                 'canciones' => $playlist->getPlaylistCanciones()->count()
             ];
         }
         return $this->json($data);
     }
+
 
     #[Route('/mostrarCancionesPlaylist/{nombre}', name: 'mostrar_playlists', methods: ['GET'])]
     public function mostrarCancionesPorNombre($nombre, EntityManagerInterface $entityManager): JsonResponse
@@ -83,7 +85,7 @@ final class PlaylistController extends AbstractController
     }
 
     //SACAR LAS PLAYLIST CREADAS POR USUARIO
-    #[Route('/playlist/misPlaylists', name: 'app_playlist_mis_playlists', methods: ['GET'])]
+    /* #[Route('/playlist/misPlaylists', name: 'app_playlist_mis_playlists', methods: ['GET'])]
     public function obtenerPlaylistsUsuarioActual(EntityManagerInterface $entityManager): JsonResponse
     {
         //obtener usuario autenticado
@@ -110,5 +112,5 @@ final class PlaylistController extends AbstractController
         }
 
         return $this->json($data);
-    }
+    } */
 }

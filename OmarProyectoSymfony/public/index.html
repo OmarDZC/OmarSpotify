@@ -21,7 +21,7 @@
             </div>
             <input type="submit" value="Buscar" id="btnBuscar">
         </div>
-        <div id="registro">  
+        <div id="registro">
             <!-- Botones de login y registro (visibles si el usuario no está logueado) -->
             <a href="/register" class="btn-link">
                 <input type="submit" value="Registro" id="registroBtn">
@@ -34,8 +34,8 @@
             <a href="/logout" id="logoutLink" style="display:none;">
                 <input type="submit" value="Logout" id="logoutBtn">
             </a>
-            
-            
+
+
         </div>
     </header>
 
@@ -64,22 +64,31 @@
         </nav>
 
         <div id="containerBody">
-            <div id="tituloCanciones">
-                <h2>Tus Playlist</h2>
+
+            <!-- "Tus Playlist" (Playlists creadas por el usuario) -->
+            <div id="tituloTusPlaylist" style="display: none;">
+                <h2 style="color: white; font-size: 40px;">Tus Playlist</h2>
             </div>
-            
+            <div id="playlistUsuario">
+                <!-- Aquí se llenarán las playlists del usuario dinámicamente -->
+            </div>
+
+            <!-- Playlists generales -->
+            <div id="tituloCanciones">
+                <h2>Playlist</h2>
+            </div>
             <div id="playlistList">
-                <!-- Aquí se llenarán las playlists dinámicamente -->
+                <!-- Aquí se llenarán todas las playlists dinámicamente -->
             </div>
-        
+
+
             <div id="tituloCanciones">
-                <h2 id="h2Canciones">Tus Canciones</h2>
+                <h2 id="h2Canciones">Canciones</h2>
             </div>
-        
             <div id="cancionesList">
                 <!-- Aquí se llenarán las canciones dinámicamente -->
-            </div> 
-        
+            </div>
+
             <div id="indexList"></div>
         </div>
     </div>

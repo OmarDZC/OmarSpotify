@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Perfil;
+use App\Entity\Playlist;
 use App\Entity\Usuario;
 use App\Repository\UsuarioRepository;
 use DateTime;
@@ -79,5 +80,27 @@ final class UsuarioController extends AbstractController
         }
 
         return new JsonResponse(['isLoggedIn' => false]);
+    }
+
+    //DEVOLVER SUS PLAYLIST
+    #[Route('/user/playlist/misPlaylist', name: 'api_mis_playlist', methods: ['GET'])]
+    public function getMisPlaylists(Security $security, EntityManagerInterface $entity): JsonResponse
+    {
+        $usuario = $security->getUser(); //Obtiene el usuario autenticado
+
+        //obtener playlist de usuario autenticado
+        $playlistRepo = $entity->getRepository(Playlist::class);
+        $playlists = $playlistRepo->findBy(['propietario' => $usuario]);
+
+        $playlistsArray = array_map(function ($playlist) {
+            return [
+                'nombre' => $playlist->getNombre(),
+                'visibilidad' => $playlist->getVisibilidad(),
+                'likes' => $playlist->getLikes(),
+                'propietario' => $playlist->getPropietario()->getNombre(),
+            ];
+        }, $playlists);
+
+        return new JsonResponse($playlistsArray);
     }
 }

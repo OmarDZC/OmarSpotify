@@ -184,12 +184,18 @@ input[type="submit"]:hover {
     flex-direction: column;
 }
 
-#tituloCanciones {
+#tituloCanciones, #tituloTusPlaylist {
     margin-top: 40px;
     margin-bottom: 20px;
 }
 
 #tituloCanciones h2 {
+    font-size: 40px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+#tituloTusPlaylist h2 {
     font-size: 40px;
     font-weight: bold;
     color: #ffffff;
@@ -235,7 +241,7 @@ input[type="submit"]:hover {
 }
 
 
-#playlistList {
+#playlistList, #playlistUsuario {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 50px; /*espacio entre cada cancion*/
@@ -266,6 +272,7 @@ input[type="submit"]:hover {
     font-size: 14px;
     color: #777;
 }
+
 
 
 /*FOOTER REPRODUCTOR*/
