@@ -16,6 +16,7 @@ use Symfony\Bundle\SecurityBundle\Security;
 
 
 
+
 final class UsuarioController extends AbstractController
 {
     #[Route('/usuario', name: 'app_usuario')]
