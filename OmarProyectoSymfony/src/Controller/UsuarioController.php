@@ -8,6 +8,7 @@ use App\Entity\Usuario;
 use App\Repository\UsuarioRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface; //se añade para hacer log
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -68,9 +69,10 @@ final class UsuarioController extends AbstractController
 
 
     #[Route('/logeado', name: 'api_is_logged_in', methods: ['GET'])]
-    public function isLoggedIn(Security $security): JsonResponse
+    public function isLoggedIn(Security $security, LoggerInterface $log): JsonResponse
     {
         $usuario = $security->getUser();
+        $log->debug($usuario->getNombre() . " se registro");
 
         if ($usuario) {
             return new JsonResponse([
@@ -85,7 +87,7 @@ final class UsuarioController extends AbstractController
 
     //DEVOLVER SUS PLAYLIST
     #[Route('/user/playlist/misPlaylist', name: 'api_mis_playlist', methods: ['GET'])]
-    public function getMisPlaylists(Security $security, EntityManagerInterface $entity): JsonResponse
+    public function getMisPlaylists(Security $security, EntityManagerInterface $entity, LoggerInterface $log): JsonResponse
     {
         $usuario = $security->getUser(); //Obtiene el usuario autenticado
 
@@ -104,4 +106,6 @@ final class UsuarioController extends AbstractController
 
         return new JsonResponse($playlistsArray);
     }
+
+    
 }
