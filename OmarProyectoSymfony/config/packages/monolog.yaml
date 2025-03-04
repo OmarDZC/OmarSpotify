@@ -11,7 +11,9 @@ when@dev:
                 path: "%kernel.project_dir%/var/log/%kernel.environment%.log"
 
                 level: debug
-                channels: ["!event"]
+                #level: notice  # Solo registra NOTICE, WARNING, ERROR, etc.
+                #channels: ["!event"]
+                channels: ["!event", "!doctrine"]  # Ignora eventos de Symfony y Doctrine
             # uncomment to get logging in your browser
             # you may have to allow bigger header sizes in your Web server configuration
             #firephp:
