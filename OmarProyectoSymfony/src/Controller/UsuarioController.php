@@ -72,6 +72,7 @@ final class UsuarioController extends AbstractController
     public function isLoggedIn(Security $security, LoggerInterface $log): JsonResponse
     {
         $usuario = $security->getUser();
+        //para hacer un log del usuario cuando se logee
         $log->debug($usuario->getNombre() . " se registro");
 
         if ($usuario) {
