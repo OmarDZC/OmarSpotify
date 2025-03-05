@@ -73,7 +73,7 @@ final class UsuarioController extends AbstractController
     {
         $usuario = $security->getUser();
         //para hacer un log del usuario cuando se logee
-        $log->debug($usuario->getNombre() . " se registro");
+        $log->debug($usuario->getNombre() . " se logeo");
 
         if ($usuario) {
             return new JsonResponse([
@@ -104,6 +104,8 @@ final class UsuarioController extends AbstractController
                 'propietario' => $playlist->getPropietario()->getNombre(),
             ];
         }, $playlists);
+
+        $log->info("imprime las playlist de " . $usuario->getNombre());
 
         return new JsonResponse($playlistsArray);
     }

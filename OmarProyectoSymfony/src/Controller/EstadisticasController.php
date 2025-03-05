@@ -8,6 +8,7 @@ use App\Repository\CancionRepository;
 use App\Repository\PlaylistCancionRepository;
 use App\Repository\PlaylistRepository;
 use App\Repository\UsuarioRepository;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,9 +18,10 @@ use Symfony\Component\Routing\Attribute\Route;
 final class EstadisticasController extends AbstractController
 {
     #[Route('/manager/estadisticas', name: 'app_estadisticas')]
-    public function index(PlaylistCancionRepository $playlistCancionRepo): Response
+    public function index(PlaylistCancionRepository $playlistCancionRepo, LoggerInterface $log): Response
     {
         /* $datos = $playlistCancionRepo->obtenerReproduccionesPorPlaylist(); */
+        $log->debug("Manager entró a estadisticas");
 
         return $this->render('estadisticas/estadisticas.html.twig', [
             'controller_name' => 'EstadisticasController',

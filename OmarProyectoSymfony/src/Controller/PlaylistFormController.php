@@ -6,6 +6,7 @@ use App\Entity\Playlist;
 use App\Form\PlaylistFormType;
 use App\Form\PlaylistType;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,23 +25,25 @@ final class PlaylistFormController extends AbstractController
     }
 
     #[Route('/crearPlayli', name: 'app_crearplaylist')]
-    public function crearPlaylist(Request $request, EntityManagerInterface $entityManager, UserInterface $user): Response
+    public function crearPlaylist(Request $request, EntityManagerInterface $entityManager, UserInterface $user, LoggerInterface $log): Response
     {
         $playlist = new Playlist();
-        $playlist->setPropietario($user); // Asigna el usuario autenticado como propietario
+        $playlist->setPropietario($user); //Asigna el usuario autenticado como propietario
 
-        // Crear el formulario
+        $log->debug("Crea una playlist propia");
+
+        //Crea el formulario
         $form = $this->createForm(PlaylistFormType::class, $playlist);
         $form->handleRequest($request);
 
-        // Procesar el formulario
+        //Procesar el formulario
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($playlist);
             $entityManager->flush();
 
-            return new RedirectResponse(url: '/index.html');
+            return new RedirectResponse('/index.html');
         }
-
+        
         return $this->render('playlist_form/playlist.html.twig', [
             'form' => $form->createView(),
         ]);

@@ -182,6 +182,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Mostrar las canciones filtradas en la consola
         console.log("Canciones filtradas:", cancionesFiltradas);
+        logToSymfony('debug', `Busca canciones: ${JSON.stringify(cancionesFiltradas)}`);
 
         //mostrarlas
         mostrarCanciones(cancionesFiltradas);
@@ -275,7 +276,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const plusBtn = document.querySelector('#plusBtn');
     plusBtn.addEventListener('click', function () {
         // Redirigir a la ruta de la playlist
-        window.location.href = '/crearPlayli'; // Aquí debes colocar la ruta correcta para el formulario
+        window.location.href = '/crearPlayli';
     });
 });
 
